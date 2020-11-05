@@ -55,8 +55,8 @@ namespace FinanceManagmentApplication.Controllers
             return Ok(await ScoreService.GetEditModel(Id));
         }
 
-        [HttpPost]
-        [Route("Post")]
+        [HttpPut]
+        [Route("Edit")]
         public async Task<ActionResult<ScoreEditModel>> Edit(ScoreEditModel model)
         {
 
