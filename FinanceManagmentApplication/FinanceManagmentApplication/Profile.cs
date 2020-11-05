@@ -6,6 +6,7 @@ using AutoMapper;
 using FinanceManagmentApplication.DAL.Entities;
 using FinanceManagmentApplication.Models.CounterPartiesModel;
 using FinanceManagmentApplication.Models.OperationModels;
+using FinanceManagmentApplication.Models.OperationTypeModels;
 using FinanceManagmentApplication.Models.PaymentType;
 using FinanceManagmentApplication.Models.ProjectModels;
 using FinanceManagmentApplication.Models.ScoreModel;
@@ -25,6 +26,7 @@ namespace FinanceManagmentApplication
             TransactionMapping();
             ScoreTransaction();
             PaymentTypeMapper();
+            OperationTypeMapper();
         }
 
         private void ProjectMapping()
@@ -34,6 +36,8 @@ namespace FinanceManagmentApplication
             CreateMap<Project, ProjectIndexModel>();
 
             CreateMap<ProjectIndexModel, Project>();
+
+            CreateMap<Project, ProjectFinanceModel>();
         }
 
         private void CounterPartyMapping()
@@ -41,6 +45,7 @@ namespace FinanceManagmentApplication
             CreateMap<CounterParty, CounterPartyIndexModel>();
             CreateMap<CounterPartyCreateModel, CounterParty>();
             CreateMap<CounterPartyEditModel, CounterParty>();
+            CreateMap<CounterParty, CounterPartyEditModel>();
         }
 
         private void UserMapping()
@@ -53,6 +58,8 @@ namespace FinanceManagmentApplication
             CreateMap<Operation, OperationDetailsModel>();
             CreateMap<OperationCreateModel, Operation>();    
             CreateMap<OperationDetailsModel, Operation>();
+            CreateMap<OperationEditModel, Operation>();
+            CreateMap<Operation, OperationEditModel>();
            
         }
 
@@ -76,11 +83,17 @@ namespace FinanceManagmentApplication
             CreateMap<Score, ScoreDetailsModel>();
             CreateMap<ScoreCreateModel, Score>();
             CreateMap<ScoreEditModel, Score>();
+            CreateMap<Score,ScoreEditModel>();
         }
 
         private void PaymentTypeMapper()
         {
             CreateMap<PaymentType, PaymentTypeIndexModel>();
+        }
+
+        private void OperationTypeMapper()
+        {
+            CreateMap<OperationType, OperationTypeIndexModel>();
         }
     }
 }

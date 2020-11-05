@@ -50,5 +50,13 @@ namespace FinanceManagmentApplication.DAL.Repositories
                 .ToList();
         }
 
+        public List<Transaction> GetTransactionToOperation(int ProjectId)
+        {
+            return DbSet
+                .Where(i => i.ProjectId == ProjectId)
+                .Include(i => i.Operation)
+                .ToList();
+        }
+
     }
 }

@@ -14,5 +14,7 @@ namespace FinanceManagmentApplication.DAL.Repositories.Contracts
         Transaction GetFullTransaction(int Id);
 
         List<Transaction> GetTransactionsToIndex();
+
+        List<Transaction> GetTransactionToOperation(int ProjectId);
     }
 }

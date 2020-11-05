@@ -38,7 +38,7 @@ namespace FinanceManagmentApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var ConnectionString = "Host=satao.db.elephantsql.com;Port=5432;Database=emnqjffo;Username=emnqjffo;Password=fRsLp1_05rlVQfPPyOT0dD7iOABf8SwM";
+            var ConnectionString = "Host=satao.db.elephantsql.com;Port=5432;Database=cfbbhtya;Username=cfbbhtya;Password=GxNh2EVsrj1sghz-8JuWHgcUCvgi4NCV";
 
 
             var optionsBuilder = new DbContextOptionsBuilder();
@@ -93,6 +93,8 @@ namespace FinanceManagmentApplication
 
             services.AddScoped<IScoreService, ScoreService>();
 
+            services.AddScoped<IFinanceService, FinanceService>();
+
             services.AddControllers();
 
             //services.AddMvc()
@@ -108,7 +110,7 @@ namespace FinanceManagmentApplication
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IUnitOfWorkFactory unitOfWorkFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IUnitOfWorkFactory unitOfWorkFactory, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -132,8 +134,11 @@ namespace FinanceManagmentApplication
                 DataInitializer.OperationTypeInitialize(uow.OperationTypes).ConfigureAwait(false).GetAwaiter().GetResult();
                 DataInitializer.OperationInitialize(uow.Operations).ConfigureAwait(false).GetAwaiter().GetResult();
                 DataInitializer.ProjectInitialize(uow.Projects).ConfigureAwait(false).GetAwaiter().GetResult();
-                DataInitializer.UserInitialize(uow.Users).ConfigureAwait(false).GetAwaiter().GetResult();
+                DataInitializer.UserInitialize(userManager, roleManager).ConfigureAwait(false).GetAwaiter().GetResult();
                 DataInitializer.PaymentTypeInitialize(uow.PaymentTypes).ConfigureAwait(false).GetAwaiter().GetResult();
+                DataInitializer.CounterPartyInitialize(uow.CounterParties).ConfigureAwait(false).GetAwaiter().GetResult();
+                DataInitializer.ScoreInitialize(uow.Scores).ConfigureAwait(false).GetAwaiter().GetResult();
+                DataInitializer.TransactionInitialize(uow.Transactions).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
 

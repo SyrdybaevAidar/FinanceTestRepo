@@ -79,7 +79,7 @@ namespace FinanceManagmentApplication.Services
         {
             using (var uow = UnitOfWorkFactory.Create())
             {
-                var Operation = uow.Operations.GetByIdAsync(Id);
+                var Operation = await uow.Operations.GetByIdAsync(Id);
                 if (Operation == null)
                 {
                     throw new NotEntityFoundException();

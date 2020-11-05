@@ -64,7 +64,7 @@ namespace FinanceManagmentApplication.Services
         {
             using (var uow = UnitOfWorkFactory.Create())
             {
-                var Score = uow.Scores.GetByIdAsync(Id);
+                var Score = await uow.Scores.GetByIdAsync(Id);
                 var Model = Mapper.Map<ScoreEditModel>(Score);
                 Model.CounterParties = Mapper.Map<List<CounterPartyIndexModel>>(await uow.CounterParties.GetAllAsync());
                 Model.paymentTypes = Mapper.Map<List<PaymentTypeIndexModel>>(await uow.PaymentTypes.GetAllAsync());

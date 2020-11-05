@@ -1,5 +1,6 @@
 ﻿using FinanceManagmentApplication.DAL.Entities;
 using FinanceManagmentApplication.DAL.Repositories.Contracts;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,28 +41,55 @@ namespace FinanceManagmentApplication.DAL.Seed
             }
         }
 
-        public static async Task UserInitialize(IUserRepository Repository)
+        public static async Task UserInitialize(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
-            
+            string adminEmail = "admin@gmail.com";
+            string password = "Password!1";
+            if (await roleManager.FindByNameAsync("admin") == null)
+            {
+                await roleManager.CreateAsync(new Role { Name = "admin" });
+            }
+            if (await roleManager.FindByNameAsync("employee") == null)
+            {
+                await roleManager.CreateAsync(new Role { Name = "employee" });
+            }
+            if (await userManager.FindByNameAsync(adminEmail) == null)
+            {
+                User admin = new User { Email = adminEmail, UserName = adminEmail };
+                IdentityResult result = await userManager.CreateAsync(admin, password);
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(admin, "admin");
+                }
+                User Employee = new User { Email = "employee@gmail.com", UserName = "employee" };
+                IdentityResult result2 = await userManager.CreateAsync(Employee, password);
+                if (result2.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(Employee, "employee");
+                }
+            }
         }
 
         public static async Task CounterPartyInitialize(ICounterPartyRepository Repository)
         {
-            await Repository.CreateAsync(new CounterParty { IsCompany = true, Name="ОсОО Таргет"});
+            await Repository.CreateAsync(new CounterParty { IsCompany = true, Name = "ОсОО Таргет" });
             await Repository.CreateAsync(new CounterParty { IsCompany = false, Name = "Аяна Каракаевна" });
-            await Repository.CreateAsync(new CounterParty { IsCompany = false, Name ="Admin", UserId = 1});
+            await Repository.CreateAsync(new CounterParty { IsCompany = false, Name = "Admin", UserId = 1 });
         }
 
         public static async Task ScoreInitialize(IScoreRepository Repository)
         {
-            await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 2, ScoreNumber="123123123"});
-            await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 1, ScoreNumber = "123123123" });
-            await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 2, ScoreNumber = "123123123" });
+            if (false)
+            {
+                await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 2, ScoreNumber = "123123123" });
+                await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 1, ScoreNumber = "123123123" });
+                await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 2, ScoreNumber = "123123123" });
+            }
         }
 
         public static async Task ProjectInitialize(IProjectRepository Repository)
         {
-            var Values = new string[] { "Neolabs", "Neobis Studio", "Neobis club", "Прочерр"};
+            var Values = new string[] { "Neolabs", "Neobis Studio", "Neobis club", "Прочерр" };
 
             var Projects = await Repository.GetAllAsync();
 
@@ -78,13 +106,13 @@ namespace FinanceManagmentApplication.DAL.Seed
         {
             var IncomeValues = new string[]
                 {
-                    
+
                     "Доход от реализации услуг",
                     "Доход от реализации продукции",
                     "Членский взнос за поступление",
                     "Прочие доходы",
-                    
-                    
+
+
                 };
             var CostValues = new string[]
                 {
@@ -104,7 +132,7 @@ namespace FinanceManagmentApplication.DAL.Seed
             {
                 if (Operations.Where(i => i.Name == Value).ToList().Count == 0)
                 {
-                    await Repository.CreateAsync(new Operation { Name = Value,OperationTypeId = 1 });
+                    await Repository.CreateAsync(new Operation { Name = Value, OperationTypeId = 1 });
                 }
             }
 
@@ -113,6 +141,35 @@ namespace FinanceManagmentApplication.DAL.Seed
                 if (Operations.Where(i => i.Name == Value).ToList().Count == 0)
                 {
                     await Repository.CreateAsync(new Operation { Name = Value, OperationTypeId = 2 });
+                }
+            }
+        }
+
+        public static async Task TransactionInitialize(ITransactionRepository repository)
+        {
+            Random rnd = new Random();
+            if ( false)
+            {
+                foreach (int ProjectId in Enumerable.Range(1, 4))
+                {
+                    foreach (int Operation in Enumerable.Range(1, 11))
+                    {
+                        foreach (int i in Enumerable.Range(1, 2))
+                        {
+
+                            await repository.CreateAsync(new Transaction
+                            {
+                                TransactionDate = DateTime.Now,
+                                Description = "Тестовые данные",
+                                Sum = rnd.Next(1, 10000),
+                                ProjectId = ProjectId,
+                                Score1Id = 3,
+                                Score2Id = 2,
+                                UserId = 1,
+                                OperationId = Operation
+                            });
+                        }
+                    }
                 }
             }
         }
