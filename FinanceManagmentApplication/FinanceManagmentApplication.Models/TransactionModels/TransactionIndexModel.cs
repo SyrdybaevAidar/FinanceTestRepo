@@ -14,11 +14,15 @@ namespace FinanceManagmentApplication.Models.TransactionModels
 
         public string OperationName { get; set; }
 
+        public string TransactionType { get; set; }
+
         public string ProjectName { get; set; }
 
-        public string NameCounterParty1 { get ; set; }
+        public string Score { get; set; }
 
-        public string NameCounterParty2 { get; set; }
+        public string CounterPartyName { get ; set; }
+
+
 
     }
 }

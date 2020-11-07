@@ -66,8 +66,8 @@ namespace FinanceManagmentApplication
         private void TransactionMapping()
         {
             CreateMap<Transaction, TransactionIndexModel>()
-                .ForMember(source => source.NameCounterParty1, target => target.MapFrom(src => src.Score1.CounterParty.Name))
-                .ForMember(source => source.NameCounterParty2, target => target.MapFrom(src => src.Score2.CounterParty.Name))
+                .ForMember(source => source.Score, target => target.MapFrom(src => src.Score.Code))
+                .ForMember(source => source.CounterPartyName, target => target.MapFrom(src => src.CounterParty.Name))
                 .ForMember(source => source.OperationName, target => target.MapFrom(src => src.Operation.Name))
                 .ForMember(source => source.ProjectName, target => target.MapFrom(src => src.Project.Name));
             CreateMap<Transaction, TransactionDetailsModel>();
@@ -78,8 +78,7 @@ namespace FinanceManagmentApplication
 
         private void ScoreTransaction()
         {
-            CreateMap<Score, ScoreIndexModel>()
-                .ForMember(i => i.CounterPartyName, src => src.MapFrom(i => i.CounterParty.Name));
+            CreateMap<Score, ScoreIndexModel>();
             CreateMap<Score, ScoreDetailsModel>();
             CreateMap<ScoreCreateModel, Score>();
             CreateMap<ScoreEditModel, Score>();

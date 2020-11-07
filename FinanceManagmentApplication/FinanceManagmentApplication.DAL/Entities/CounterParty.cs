@@ -16,6 +16,6 @@ namespace FinanceManagmentApplication.DAL.Entities
 
         public int? UserId { get; set; }
 
-        public IEnumerable<Score> Scores { get; set; }
+        public IEnumerable<Transaction> Transactions { get; set; }
     }
 }

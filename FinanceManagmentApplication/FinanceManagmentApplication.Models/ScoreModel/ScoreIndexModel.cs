@@ -8,8 +8,11 @@ namespace FinanceManagmentApplication.Models.ScoreModel
     {
         public int Id { get; set; }
 
+        public string Code { get; set; }
+
+        public int Sum { get; set; }
+
         public string Name { get; set; }
 
-        public string CounterPartyName { get; set; }
     }
 }

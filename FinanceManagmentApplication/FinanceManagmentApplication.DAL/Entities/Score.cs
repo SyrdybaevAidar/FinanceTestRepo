@@ -9,23 +9,17 @@ namespace FinanceManagmentApplication.DAL.Entities
     {
         public int Id { get; set; }
 
-        public string ScoreNumber { get; set; }
+        public string Code { get; set; }
+
+        public string Name { get; set; }
 
         public PaymentType PaymentType { get; set; }
 
         public int PaymentTypeId { get; set; }
 
-        public CounterParty CounterParty { get; set; }
+        public int Balance { get; set; }
 
-        public int CounterPartyId { get; set; }
-
-        public int Money { get; set; }
-
-        [InverseProperty("Score1")]
-        public virtual IEnumerable<Transaction> Transactions1 { get; set; }
-
-        [InverseProperty("Score2")]
-        public virtual IEnumerable<Transaction> Transactions2 { get; set; }
+        public IEnumerable<Transaction> Transactions { get; set; }
 
     }
 }

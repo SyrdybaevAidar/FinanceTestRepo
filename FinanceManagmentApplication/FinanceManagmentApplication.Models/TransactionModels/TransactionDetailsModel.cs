@@ -23,9 +23,9 @@ namespace FinanceManagmentApplication.Models.TransactionModels
 
         public Score Score1 { get; set; }
 
-        public int Score2Id { get; set; }
+        public int CounterPartyId { get; set; }
 
-        public Score Score2 { get; set; }
+        public CounterParty CounterParty { get; set; }
 
         public int UserId { get; set; }
 

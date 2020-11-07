@@ -21,7 +21,7 @@ namespace FinanceManagmentApplication.DAL.Repositories
 
         public bool CheckToScore(int ScoreId)
         {
-            return DbSet.Any(i => i.Score1Id == ScoreId || i.Score2Id == ScoreId);
+            return DbSet.Any(i => i.ScoreId == ScoreId);
         }
 
         public bool CheckTransactionToOperation(int OperationId)
@@ -29,13 +29,18 @@ namespace FinanceManagmentApplication.DAL.Repositories
             return DbSet.Any(i => i.OperationId == OperationId);
         }
 
+        public bool CheckTransactionToCounterPart(int CounterPartyId)
+        {
+            return DbSet.Any(i => i.CounterPartyId == CounterPartyId);
+        }
+
         public Transaction GetFullTransaction(int Id)
         {
             return DbSet.Where(i => i.Id == Id)
                 .Include(i => i.Operation)
                 .Include(i => i.Project)
-                .Include(i => i.Score1)
-                .Include(i => i.Score2)
+                .Include(i => i.Score)
+                .Include(i => i.CounterParty)
                 .Include(i => i.User)
                 .FirstOrDefault();
         }
@@ -45,8 +50,8 @@ namespace FinanceManagmentApplication.DAL.Repositories
             return DbSet
                 .Include(i => i.Operation)
                 .Include(i => i.Project)
-                .Include(i => i.Score1)
-                .Include(i => i.Score2)
+                .Include(i => i.Score)
+                .Include(i => i.CounterParty)
                 .ToList();
         }
 

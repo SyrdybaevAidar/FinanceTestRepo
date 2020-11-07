@@ -20,13 +20,13 @@ namespace FinanceManagmentApplication.DAL.Entities
 
         public int ProjectId { get; set; }
 
-        public Score Score1 { get; set; }
+        public Score Score { get; set; }
 
-        public int Score1Id { get; set; }
+        public int ScoreId { get; set; }
 
-        public virtual Score Score2 { get; set; }
+        public CounterParty CounterParty { get; set; }
 
-        public int Score2Id { get; set; }
+        public int CounterPartyId { get; set; }
 
         public virtual User User { get; set; }
 

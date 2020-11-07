@@ -23,9 +23,7 @@ namespace FinanceManagmentApplication.Models.TransactionModels
 
         public List<ScoreIndexModel> Scores { get; set; }
 
-        public int Score1Id { get; set; }
-
-        public int Score2Id { get; set; }
+        public int ScoreId { get; set; }
 
         public int UserId { get; set; }
 

@@ -16,5 +16,7 @@ namespace FinanceManagmentApplication.DAL.Repositories.Contracts
         List<Transaction> GetTransactionsToIndex();
 
         List<Transaction> GetTransactionToOperation(int ProjectId);
+
+        bool CheckTransactionToCounterPart(int CounterPartyId);
     }
 }

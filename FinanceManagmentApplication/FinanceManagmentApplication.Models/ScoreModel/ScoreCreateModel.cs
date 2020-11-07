@@ -8,7 +8,9 @@ namespace FinanceManagmentApplication.Models.ScoreModel
 {
     public class ScoreCreateModel
     {
-        public string ScoreNumber { get; set; }
+        public string Code { get; set; }
+
+        public string Name { get; set; }
 
         public List<PaymentTypeIndexModel> paymentTypes { get; set; }
 
@@ -16,6 +18,5 @@ namespace FinanceManagmentApplication.Models.ScoreModel
 
         public List<CounterPartyIndexModel> CounterParties {get;set;}
 
-        public int CounterPartyId { get; set; }
     }
 }

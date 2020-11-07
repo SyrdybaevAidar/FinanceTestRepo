@@ -74,16 +74,15 @@ namespace FinanceManagmentApplication.DAL.Seed
         {
             await Repository.CreateAsync(new CounterParty { IsCompany = true, Name = "ОсОО Таргет" });
             await Repository.CreateAsync(new CounterParty { IsCompany = false, Name = "Аяна Каракаевна" });
-            await Repository.CreateAsync(new CounterParty { IsCompany = false, Name = "Admin", UserId = 1 });
         }
 
         public static async Task ScoreInitialize(IScoreRepository Repository)
         {
-            if (false)
+            if (true)
             {
-                await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 2, ScoreNumber = "123123123" });
-                await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 1, ScoreNumber = "123123123" });
-                await Repository.CreateAsync(new Score { CounterPartyId = 1, PaymentTypeId = 2, ScoreNumber = "123123123" });
+                await Repository.CreateAsync(new Score { Name="KICB", PaymentTypeId = 2, Code = "123123123" , Balance = 10000 });
+                await Repository.CreateAsync(new Score { Name="ELSOM", PaymentTypeId = 1, Code = "123123123" , Balance = 10000});
+                await Repository.CreateAsync(new Score { Name="DemirBank", PaymentTypeId = 2, Code = "123123123" , Balance = 10000});
             }
         }
 
@@ -148,9 +147,9 @@ namespace FinanceManagmentApplication.DAL.Seed
         public static async Task TransactionInitialize(ITransactionRepository repository)
         {
             Random rnd = new Random();
-            if ( false)
+            if ( true)
             {
-                foreach (int ProjectId in Enumerable.Range(1, 4))
+                foreach (int ProjectId in Enumerable.Range(1, 3))
                 {
                     foreach (int Operation in Enumerable.Range(1, 11))
                     {
@@ -163,8 +162,8 @@ namespace FinanceManagmentApplication.DAL.Seed
                                 Description = "Тестовые данные",
                                 Sum = rnd.Next(1, 10000),
                                 ProjectId = ProjectId,
-                                Score1Id = 3,
-                                Score2Id = 2,
+                                ScoreId = 3,
+                                CounterPartyId = 1,
                                 UserId = 1,
                                 OperationId = Operation
                             });

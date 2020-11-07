@@ -7,7 +7,7 @@ namespace FinanceManagmentApplication.DAL.Repositories.Contracts
 {
     public interface IScoreRepository: IRepository<Score>
     {
-        bool CheckScoreToCounterParty(int Id);
+        //bool CheckScoreToCounterParty(int Id);
 
         bool Check(int Id);
 

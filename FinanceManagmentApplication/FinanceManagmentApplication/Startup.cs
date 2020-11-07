@@ -40,7 +40,7 @@ namespace FinanceManagmentApplication
         {
             services.AddCors();
 
-            var ConnectionString = "Host=satao.db.elephantsql.com;Port=5432;Database=cfbbhtya;Username=cfbbhtya;Password=GxNh2EVsrj1sghz-8JuWHgcUCvgi4NCV";
+            var ConnectionString = "Host=hansken.db.elephantsql.com;Port=5432;Database=wsgzqquj;Username=wsgzqquj;Password=GB_ydJ67dmEHO0LU0nZVxDi-XhggfVZ4";
 
 
             var optionsBuilder = new DbContextOptionsBuilder();

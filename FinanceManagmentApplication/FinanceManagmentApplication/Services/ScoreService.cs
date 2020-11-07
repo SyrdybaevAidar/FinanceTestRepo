@@ -39,9 +39,7 @@ namespace FinanceManagmentApplication.Services
                 if (model == null)
                     return new Response { Status = StatusEnum.Error, Message="ничего на сервер не отправлено"};
                 if(!uow.OperationTypes.Check(model.PaymentTypeId))
-                    return new Response { Status = StatusEnum.Error, Message = "Нет такого типа операций" };
-                if (!uow.CounterParties.Check(model.CounterPartyId))
-                    return new Response { Status = StatusEnum.Error, Message = "Нет такого контрагента" };
+                    return new Response { Status = StatusEnum.Error, Message = "Нет такого типа счета" };
                 await uow.Scores.CreateAsync(Score);
                 return new Response { Status = StatusEnum.Accept, Message = "Запрос прошел успешно" };
 

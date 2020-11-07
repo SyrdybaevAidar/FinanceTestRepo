@@ -34,12 +34,8 @@ namespace FinanceManagmentApplication.Services
                 var _User = await UserManager.FindByNameAsync(User.Identity.Name);
                 
 
-                if (model.Score1Id == model.Score2Id)
-                {
-                    return new Response { Status = StatusEnum.Error, Message = "Нельзя провести с транзакцию на один и тот же счет." };
-                }
-
-                if (!uow.Scores.Check(model.Score1Id) || !uow.Scores.Check(model.Score2Id))
+         
+                if (!uow.Scores.Check(model.ScoreId))
                 {
                     return new Response { Status = StatusEnum.Error, Message = "В транзакции указан несуществующий счет" };
                 }
@@ -86,10 +82,8 @@ namespace FinanceManagmentApplication.Services
                     return new Response { Status = StatusEnum.Error, Message = "Нет такого типа операций" };
                 if (!uow.Projects.Check(model.ProjectId))
                     return new Response { Status = StatusEnum.Error, Message = "Нет такого проекта!" };
-                if (!uow.Scores.Check(model.Score1Id) || !uow.Scores.Check(model.Score2Id))
+                if (!uow.Scores.Check(model.Score1Id))
                     return new Response { Status = StatusEnum.Error, Message = "Нет такого счета!" };
-                if(model.Score1Id == model.Score2Id)
-                    return new Response{ Status = StatusEnum.Error, Message = "Нельзя проводить операцию на один и тот же счет!"  };
                 var _User = await UserManager.FindByNameAsync(User.Identity.Name);
                 Transaction.UserId = _User.Id;
                 await uow.Transactions.UpdateAsync(Transaction);
@@ -132,8 +126,7 @@ namespace FinanceManagmentApplication.Services
                 var Models = new List<TransactionIndexModel>();
                 foreach (var Transaction in Transactions)
                 {
-                    Transaction.Score1.CounterParty = await uow.CounterParties.GetByIdAsync(Transaction.Score1.CounterPartyId);
-                    Transaction.Score2.CounterParty = await uow.CounterParties.GetByIdAsync(Transaction.Score2.CounterPartyId);
+                    
                     var Model = Mapper.Map<TransactionIndexModel>(Transaction);
                     Models.Add(Model);
                 }

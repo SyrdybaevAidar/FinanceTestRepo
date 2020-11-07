@@ -16,10 +16,10 @@ namespace FinanceManagmentApplication.DAL.Repositories
             DbSet = applicationDbContext.Scores;
         }
 
-        public bool CheckScoreToCounterParty(int Id)
-        {
-            return DbSet.Any(i => i.CounterPartyId == Id);
-        }
+        //public bool CheckScoreToCounterParty(int Id)
+        //{
+        //    return DbSet.Any(i => i.CounterPartyId == Id);
+        //}
 
         public bool Check(int Id)
         {
@@ -28,7 +28,7 @@ namespace FinanceManagmentApplication.DAL.Repositories
 
         public List<Score> GetFullScore()
         {
-            return DbSet.Include(i => i.CounterParty)
+            return DbSet
                 .Include(i => i.PaymentType).ToList();
         }
     }
