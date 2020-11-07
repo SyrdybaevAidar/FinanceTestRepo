@@ -6,6 +6,7 @@ using FinanceManagmentApplication.Models.ErrorModels;
 using FinanceManagmentApplication.Models.TransactionModels;
 using FinanceManagmentApplication.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
