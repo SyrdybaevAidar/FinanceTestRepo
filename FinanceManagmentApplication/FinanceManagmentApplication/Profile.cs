@@ -80,7 +80,8 @@ namespace FinanceManagmentApplication
         private void ScoreTransaction()
         {
             CreateMap<Score, ScoreIndexModel>();
-            CreateMap<Score, ScoreDetailsModel>();
+            CreateMap<Score, ScoreDetailsModel>()
+                .ForMember(Source => Source.PaymentType, target => target.MapFrom(src => src.PaymentType.Name));
             CreateMap<ScoreCreateModel, Score>();
             CreateMap<ScoreEditModel, Score>();
             CreateMap<Score,ScoreEditModel>();

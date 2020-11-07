@@ -30,6 +30,14 @@ namespace FinanceManagmentApplication.Services
             }
         }
 
+        public async Task<List<ScoreDetailsModel>> GetAllDetails()
+        {
+            using (var uow = UnitOfWorkFactory.Create())
+            {
+                return Mapper.Map<List<ScoreDetailsModel>>(uow.Scores.GetFullScore());
+            }
+        }
+
 
         public async Task<Response> Create(ScoreCreateModel model)
         {

@@ -29,6 +29,13 @@ namespace FinanceManagmentApplication.Controllers
         }
 
         [HttpGet]
+        [Route("ScoresDetails")]
+        public async Task<ActionResult<List<ScoreDetailsModel>>> DetailsIndex()
+        {
+            return await ScoreService.GetAllDetails();
+        }
+
+        [HttpGet]
         [Route("Create")]
         public async Task<ActionResult<ScoreCreateModel>> Create()
         {

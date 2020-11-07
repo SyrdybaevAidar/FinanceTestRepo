@@ -10,11 +10,13 @@ namespace FinanceManagmentApplication.Models.ScoreModel
     {   
         public int Id { get; set; }
 
-        public string ScoreNumber { get; set; }
+        public string Code { get; set; }
 
-        public List<PaymentTypeIndexModel> paymentTypes { get; set; }
+        public string PaymentType { get; set; }
 
-        public int PaymentTypeId { get; set; }
+        public string Name { get; set; }
+
+        public int Sum { get; set; }
 
     }
 }

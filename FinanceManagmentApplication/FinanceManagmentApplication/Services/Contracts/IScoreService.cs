@@ -17,6 +17,9 @@ namespace FinanceManagmentApplication.Services.Contracts
         Task<ScoreEditModel> GetEditModel(int Id);
 
         Task<Response> Edit(ScoreEditModel model);
+
         Task<Response> Delete(int Id);
+
+        Task<List<ScoreDetailsModel>> GetAllDetails();
     }
 }
