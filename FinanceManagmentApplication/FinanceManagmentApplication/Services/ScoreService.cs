@@ -51,7 +51,6 @@ namespace FinanceManagmentApplication.Services
             using (var uow = UnitOfWorkFactory.Create())
             {
                 var Score = new ScoreCreateModel();
-                Score.CounterParties = Mapper.Map<List<CounterPartyIndexModel>>(await uow.CounterParties.GetAllAsync());
                 Score.paymentTypes = Mapper.Map<List<PaymentTypeIndexModel>>(await uow.PaymentTypes.GetAllAsync());
                 return Score;
 
@@ -64,7 +63,6 @@ namespace FinanceManagmentApplication.Services
             {
                 var Score = await uow.Scores.GetByIdAsync(Id);
                 var Model = Mapper.Map<ScoreEditModel>(Score);
-                Model.CounterParties = Mapper.Map<List<CounterPartyIndexModel>>(await uow.CounterParties.GetAllAsync());
                 Model.paymentTypes = Mapper.Map<List<PaymentTypeIndexModel>>(await uow.PaymentTypes.GetAllAsync());
                 return Model;
 
@@ -80,13 +78,10 @@ namespace FinanceManagmentApplication.Services
                     return new Response { Status = StatusEnum.Error, Message = "ничего на сервер не отправлено" };
                 if (uow.PaymentTypes.Check(model.PaymentTypeId))
                     return new Response { Status = StatusEnum.Error, Message = "Нет такого типа операций" };
-                if (uow.CounterParties.Check(model.CounterPartyId))
-                    return new Response { Status = StatusEnum.Error, Message = "Нет такого контрагента" };
                 if (!uow.Scores.Check(model.Id))
                     return new Response { Status = StatusEnum.Error, Message = "Нет такого счета!" };
                 await uow.Scores.UpdateAsync(Score);
                 return new Response { Status = StatusEnum.Accept, Message = "Запрос прошел успешно" };
-
             }
         }
 

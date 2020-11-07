@@ -19,5 +19,6 @@ namespace FinanceManagmentApplication.DAL.Repositories
         {
             return DbSet.Any(i => i.Id == Id);
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using FinanceManagmentApplication.Models.OperationModels;
+﻿using FinanceManagmentApplication.Models.CounterPartiesModel;
+using FinanceManagmentApplication.Models.OperationModels;
 using FinanceManagmentApplication.Models.ProjectModels;
 using FinanceManagmentApplication.Models.ScoreModel;
 using System;
@@ -22,6 +23,8 @@ namespace FinanceManagmentApplication.Models.TransactionModels
         public int ProjectId { get; set; }
 
         public List<ScoreIndexModel> Scores { get; set; }
+
+        public List<CounterPartyIndexModel> counterParties { get; set; }
 
         public int ScoreId { get; set; }
 

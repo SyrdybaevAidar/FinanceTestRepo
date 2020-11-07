@@ -9,6 +9,7 @@ namespace FinanceManagmentApplication.Models.OperationModels
     public class OperationEditModel
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
 
         public int OperationTypeId { get; set; }

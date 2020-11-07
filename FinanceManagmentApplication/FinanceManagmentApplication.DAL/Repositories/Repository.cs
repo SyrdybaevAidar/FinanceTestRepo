@@ -49,5 +49,10 @@ namespace FinanceManagmentApplication.DAL.Repositories
             Context.Remove(entity);
             await Context.SaveChangesAsync();
         }
+
+        public async Task<bool> CheckCount()
+        {
+            return await DbSet.CountAsync() > 0;
+        }
     }
 }

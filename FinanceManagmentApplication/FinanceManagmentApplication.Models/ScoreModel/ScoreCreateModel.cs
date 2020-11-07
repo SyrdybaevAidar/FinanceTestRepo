@@ -16,7 +16,5 @@ namespace FinanceManagmentApplication.Models.ScoreModel
 
         public int PaymentTypeId { get; set; }
 
-        public List<CounterPartyIndexModel> CounterParties {get;set;}
-
     }
 }

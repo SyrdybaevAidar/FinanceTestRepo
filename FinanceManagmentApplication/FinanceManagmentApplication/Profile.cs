@@ -69,7 +69,8 @@ namespace FinanceManagmentApplication
                 .ForMember(source => source.Score, target => target.MapFrom(src => src.Score.Code))
                 .ForMember(source => source.CounterPartyName, target => target.MapFrom(src => src.CounterParty.Name))
                 .ForMember(source => source.OperationName, target => target.MapFrom(src => src.Operation.Name))
-                .ForMember(source => source.ProjectName, target => target.MapFrom(src => src.Project.Name));
+                .ForMember(source => source.ProjectName, target => target.MapFrom(src => src.Project.Name))
+                .ForMember(source => source.TransactionType, target => target.MapFrom(src => src.Operation.OperationType.Name));
             CreateMap<Transaction, TransactionDetailsModel>();
             CreateMap<TransactionCreateModel, Transaction>();
             CreateMap<TransactionEditModel, Transaction>();

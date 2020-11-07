@@ -13,5 +13,6 @@ namespace FinanceManagmentApplication.DAL.Repositories.Contracts
         Task<T> GetByIdAsync(int id);
         Task UpdateAsync(T entity);
         Task RemoveAsync(T entity);
+        Task<bool> CheckCount();
     }
 }

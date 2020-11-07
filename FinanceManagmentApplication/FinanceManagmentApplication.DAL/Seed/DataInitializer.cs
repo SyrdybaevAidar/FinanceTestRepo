@@ -72,13 +72,17 @@ namespace FinanceManagmentApplication.DAL.Seed
 
         public static async Task CounterPartyInitialize(ICounterPartyRepository Repository)
         {
-            await Repository.CreateAsync(new CounterParty { IsCompany = true, Name = "ОсОО Таргет" });
-            await Repository.CreateAsync(new CounterParty { IsCompany = false, Name = "Аяна Каракаевна" });
+
+            if (!await Repository.CheckCount())
+            {
+                await Repository.CreateAsync(new CounterParty { IsCompany = true, Name = "ОсОО Таргет" });
+                await Repository.CreateAsync(new CounterParty { IsCompany = false, Name = "Аяна Каракаевна" });
+            }
         }
 
         public static async Task ScoreInitialize(IScoreRepository Repository)
         {
-            if (true)
+            if (!await Repository.CheckCount())
             {
                 await Repository.CreateAsync(new Score { Name="KICB", PaymentTypeId = 2, Code = "123123123" , Balance = 10000 });
                 await Repository.CreateAsync(new Score { Name="ELSOM", PaymentTypeId = 1, Code = "123123123" , Balance = 10000});
@@ -87,7 +91,8 @@ namespace FinanceManagmentApplication.DAL.Seed
         }
 
         public static async Task ProjectInitialize(IProjectRepository Repository)
-        {
+        {   
+
             var Values = new string[] { "Neolabs", "Neobis Studio", "Neobis club", "Прочерр" };
 
             var Projects = await Repository.GetAllAsync();
@@ -147,7 +152,7 @@ namespace FinanceManagmentApplication.DAL.Seed
         public static async Task TransactionInitialize(ITransactionRepository repository)
         {
             Random rnd = new Random();
-            if ( true)
+            if (!await repository.CheckCount())
             {
                 foreach (int ProjectId in Enumerable.Range(1, 3))
                 {

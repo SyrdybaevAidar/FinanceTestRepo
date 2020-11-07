@@ -1,4 +1,5 @@
 ﻿using FinanceManagmentApplication.DAL.Entities;
+using FinanceManagmentApplication.Models.CounterPartiesModel;
 using FinanceManagmentApplication.Models.OperationModels;
 using FinanceManagmentApplication.Models.ProjectModels;
 using FinanceManagmentApplication.Models.ScoreModel;
@@ -26,7 +27,9 @@ namespace FinanceManagmentApplication.Models.TransactionModels
 
         public List<ScoreIndexModel> Scores { get; set; }
 
-        public int Score1Id { get; set; }
+        public List<CounterPartyIndexModel> counterParties { get; set; }
+
+        public int ScoreId { get; set; }
 
         public int CounterPartyId { get; set; }
 
