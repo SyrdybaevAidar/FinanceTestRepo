@@ -26,6 +26,8 @@ namespace FinanceManagmentApplication.Models.TransactionModels
 
         public List<CounterPartyIndexModel> counterParties { get; set; }
 
+        public int CounterPartyId { get; set; }
+
         public int ScoreId { get; set; }
 
         public int UserId { get; set; }
