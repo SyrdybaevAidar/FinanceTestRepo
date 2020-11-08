@@ -41,7 +41,7 @@ namespace FinanceManagmentApplication
         public void ConfigureServices(IServiceCollection services)
         {
           
-            var ConnectionString = "Host=satao.db.elephantsql.com;Port=5432;Database=vyclzknp;Username=vyclzknp;Password=jJVP6wy6uptHsaCkpUIA3Niy3Ip2aRLn";
+            var ConnectionString = "Host=satao.db.elephantsql.com;Port=5432;Database=ciwknvwy;Username=ciwknvwy;Password=Wy5bXX4cLYYKL4BBPemlyTgrh1qCT5lY";
 
             services.AddSwaggerGen(c =>
             {

@@ -93,7 +93,7 @@ namespace FinanceManagmentApplication.DAL.Seed
         public static async Task ProjectInitialize(IProjectRepository Repository)
         {   
 
-            var Values = new string[] { "Neolabs", "Neobis Studio", "Neobis club", "Прочерр" };
+            var Values = new string[] { "Neolabs", "Neobis Studio", "Neobis club", "Прочее" };
 
             var Projects = await Repository.GetAllAsync();
 
