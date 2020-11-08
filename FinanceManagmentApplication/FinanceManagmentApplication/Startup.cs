@@ -40,6 +40,8 @@ namespace FinanceManagmentApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors( c => c.AddPolicy("AllowPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
           
             var ConnectionString = "Host=satao.db.elephantsql.com;Port=5432;Database=ciwknvwy;Username=ciwknvwy;Password=Wy5bXX4cLYYKL4BBPemlyTgrh1qCT5lY";
 
@@ -132,7 +134,7 @@ namespace FinanceManagmentApplication
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCorsMiddleware();
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseEndpoints(endpoints =>
             {
