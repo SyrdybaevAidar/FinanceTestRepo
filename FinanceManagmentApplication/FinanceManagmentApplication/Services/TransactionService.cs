@@ -34,6 +34,7 @@ namespace FinanceManagmentApplication.Services
             {
                 var _User = await UserManager.FindByNameAsync(User.Identity.Name);
                 
+                
                 if (!uow.Scores.Check(model.ScoreId))
                 {
                     return new Response { Status = StatusEnum.Error, Message = "В транзакции указан несуществующий счет" };
@@ -47,6 +48,13 @@ namespace FinanceManagmentApplication.Services
                 if (!uow.Projects.Check(model.ProjectId))
                 {
                     return new Response { Status = StatusEnum.Error, Message = "В транзакции указан несуществующий проект!" };
+                }
+                var Score = await uow.Scores.GetByIdAsync(model.ScoreId);
+                var Operation = await uow.Operations.GetByIdAsync(model.OperationId);
+
+                if (!validateSum(model.Sum, Score.Balance, Operation.OperationTypeId))
+                {
+                    return new Response { Status = StatusEnum.Error, Message = "На счету недостаточно денег!" };
                 }
 
                 model.UserId = _User.Id;
@@ -86,6 +94,7 @@ namespace FinanceManagmentApplication.Services
                     return new Response { Status = StatusEnum.Error, Message = "Нет такого счета!" };
                 var _User = await UserManager.FindByNameAsync(User.Identity.Name);
                 Transaction.UserId = _User.Id;
+                Transaction.TransactionDate = Transaction.TransactionDate.ToLocalTime();
                 await uow.Transactions.UpdateAsync(Transaction);
                 return new Response { Status = StatusEnum.Accept, Message = "Редактирование транзакции прошло успешно." };
 
@@ -101,7 +110,7 @@ namespace FinanceManagmentApplication.Services
                 Model.Operations = Mapper.Map<List<OperationIndexModel>>(await uow.Operations.GetAllAsync());
                 Model.Projects = Mapper.Map<List<ProjectIndexModel>>(await uow.Projects.GetAllAsync());
                 Model.Scores = Mapper.Map<List<ScoreIndexModel>>(await uow.Scores.GetAllAsync());
-                Model.counterParties = Mapper.Map<List<CounterPartyIndexModel>>(await uow.CounterParties.GetAllAsync());
+                Model.counterParties = Mapper.Map<List<CounterPartyIndexModel>> (await uow.CounterParties.GetAllAsync());
                 return Model;
             }
         }
@@ -134,6 +143,20 @@ namespace FinanceManagmentApplication.Services
 
                 return Models;
             }
+        }
+
+        private bool validateSum(int TransactionSum, int ScoreSum, int OperationType)
+        {
+            int Income = 1;
+            int Expense = 2;
+
+            if (OperationType == Expense)
+            {
+                return TransactionSum >= ScoreSum;
+            }
+
+            return true;
+        
         }
 
 

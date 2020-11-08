@@ -22,7 +22,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore;
 using Newtonsoft.Json;
+using Microsoft.OpenApi.Models;
 
 namespace FinanceManagmentApplication
 {
@@ -40,6 +42,12 @@ namespace FinanceManagmentApplication
         {
           
             var ConnectionString = "Host=satao.db.elephantsql.com;Port=5432;Database=vyclzknp;Username=vyclzknp;Password=jJVP6wy6uptHsaCkpUIA3Niy3Ip2aRLn";
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
+
 
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseNpgsql(ConnectionString);
@@ -131,6 +139,13 @@ namespace FinanceManagmentApplication
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
             using (var uow = unitOfWorkFactory.Create())

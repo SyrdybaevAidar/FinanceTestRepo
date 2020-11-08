@@ -9,7 +9,9 @@ using System.Text;
 namespace FinanceManagmentApplication.Models.TransactionModels
 {
     public class TransactionCreateModel
-    {
+    {   
+        public int modelId { get; set; } 
+
         public DateTime TransactionDate { get; set; }
 
         public int Sum { get; set; }

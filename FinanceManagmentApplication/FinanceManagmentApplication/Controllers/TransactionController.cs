@@ -26,7 +26,7 @@ namespace FinanceManagmentApplication.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public async Task<IActionResult> Create(TransactionCreateModel model)
+        public async Task<ActionResult<TransactionIndexModel>> Create(TransactionCreateModel model)
         {
             var Result = await TransactionService.Create(model, User);
             return Ok(Result);
@@ -46,14 +46,7 @@ namespace FinanceManagmentApplication.Controllers
             return await TransactionService.GetAll();
         }
 
-        [HttpGet("{Id}")]
-        [Route("Details")]
-        public async Task<ActionResult<TransactionDetailsModel>> Details(int Id)
-        {   
-           
-            return await TransactionService.GetDetailsModel(Id);
-        }
-
+    
         [HttpPut]
         [Route("Edit")]
         public async Task<IActionResult> Edit(TransactionEditModel model)
@@ -73,7 +66,5 @@ namespace FinanceManagmentApplication.Controllers
             return await TransactionService.GetEditModel(Id);
         }
         
-
-
     }
 }
